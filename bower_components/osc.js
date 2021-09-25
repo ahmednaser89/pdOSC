@@ -19,7 +19,15 @@ oscPort.on("ready", function () {
         ]
     });
 });
-
+    oscPort.send({
+        address: "/carrier/frequency",
+        args: [
+            {
+                type: "f",
+                value: 440
+            }
+        ]
+    });
 /*
  * osc.js: An Open Sound Control library for JavaScript that works in both the browser and Node.js
  *
