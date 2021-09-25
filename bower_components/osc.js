@@ -1,3 +1,25 @@
+var oscPort = new osc.WebSocketPort({
+    url: "ws://192.168.1.5:9998", // URL to your Web Socket server.
+    metadata: true
+});
+
+oscPort.open();
+oscPort.on("message", function (oscMsg) {
+    console.log("An OSC message just arrived!", oscMsg);
+});
+// For most Ports, send() should only be called after the "ready" event fires.
+oscPort.on("ready", function () {
+    oscPort.send({
+        address: "/carrier/frequency",
+        args: [
+            {
+                type: "f",
+                value: 440
+            }
+        ]
+    });
+});
+
 /*
  * osc.js: An Open Sound Control library for JavaScript that works in both the browser and Node.js
  *
